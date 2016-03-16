@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">第二代飞扬小鸟</string>
+    <string name="game_over">游戏结束</string>
+    <string name="Default_topscore_name">飞机</string>
+    <string name="Paused">已暂停</string>
+    <string name="Tap_to_start">点击开始</string>
+
+    <string name="Play">开始</string>
+
+</resources>
