@@ -150,7 +150,7 @@ public class MainGame extends Screen {
 
 	}
 
-	//线程
+	//线程打开广告，目前并没有实现，预留了该功能
 	public void openAd() {
 		runOnUiThread(new Runnable() {
 			public void run() {
@@ -436,7 +436,9 @@ public class MainGame extends Screen {
 	}
 
 	//游戏功能 
-
+	/**
+	 * 游戏开始
+	 */
 	public void StartGame() {
 		
 		score = 0;
@@ -477,9 +479,15 @@ public class MainGame extends Screen {
 		pause = false;
 	}
 
+	/**
+	 * 游戏结束
+	 */
 	public synchronized void GameOver() {
+		//打开广告
 		openAd();
+		//关闭音乐
 		StopMusic();
+		//当前状态为游戏结束
 		state = GAMEOVER;
 	
 	}
@@ -622,6 +630,10 @@ public class MainGame extends Screen {
 	}
 
 	//Rendering of background
+	/**
+	 * 绘制屏幕背景
+	 * @param canvas
+	 */
 	public void renderBackground(Canvas canvas) {
 
 		//可以改变背景颜色设置背景的摆设
@@ -646,15 +658,23 @@ public class MainGame extends Screen {
 		return radius;
 	}
 
+	/**
+	 * 当从其他界面回到主界面时调用
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		//分数管理器调用
 		highscoreManager.onActivityResult(requestCode, resultCode, data);
 	}
 
+	/**
+	 * 当界面从堆栈中回来调用
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
+		//同样还是分数管理器调用
 		highscoreManager.onResume();
 	}
 
@@ -664,13 +684,20 @@ public class MainGame extends Screen {
 		highscoreManager.onSaveInstanceState(outState);
 	}
 
+	/**
+	 * 在界面暂停的时候调用
+	 */
 	@Override
 	public void onPause() {
 		super.onPause();
+		//游戏也暂停
 		pause();
 		highscoreManager.onPause();
 	}
 
+	/**
+	 * 当前app销毁调用
+	 */
 	@Override
 	public void onDestroy() {
 		super.onDestroy();

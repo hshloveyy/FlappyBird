@@ -7,6 +7,11 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.SystemClock;
 
+/**
+ * 小鸟的类，包括小鸟飞行的方向，小鸟的图片等都在当前类修改设置
+ * @author heshaohua
+ *
+ */
 public class Sprite {
 	Bitmap unrotated_image_sequence[], image_sequence[];
 	int current_image = 0;
@@ -17,6 +22,11 @@ public class Sprite {
 	//初始化图片绘制
 	public Paint imagePaint = new Paint();
 
+	/**
+	 * 实例化，参数有图片跟大小比例
+	 * @param image
+	 * @param scale
+	 */
 	public Sprite(Bitmap image, float scale) {
 		image_sequence = new Bitmap[1];
 
@@ -25,6 +35,14 @@ public class Sprite {
 
 	}
 
+	/**
+	 * 实例方法，这个除了图片，大小比例，还有横坐标，长度，跟动画时间设置
+	 * @param sprite_sheet
+	 * @param scale
+	 * @param itemsX
+	 * @param length
+	 * @param animation_speed
+	 */
 	public Sprite(Bitmap sprite_sheet, float scale, int itemsX, int length, int animation_speed) {
 		this.animation_speed = animation_speed;
 		unrotated_image_sequence = convert(sprite_sheet, itemsX, length);
@@ -37,19 +55,36 @@ public class Sprite {
 		start_time = (long) (SystemClock.uptimeMillis() + (Math.random() * 400));
 	}
 
+	/**
+	 * 获取当前对象的宽度
+	 * @return
+	 */
 	public int getWidth() {
 		return image_sequence[0].getWidth();
 	}
 
+	/**
+	 * 获取当前对象的宽度
+	 * @return
+	 */
 	public int getHeight() {
 		return image_sequence[0].getHeight();
 	}
 
+	/**
+	 * 获取当前对象的方向
+	 * @return
+	 */
 	public float getDirection() {
 		return direction;
 	}
 
-	//在屏幕上绘制图形
+	/**
+	 * 在屏幕上绘制图形
+	 * @param canvas
+	 * @param x
+	 * @param y
+	 */
 	public void draw(Canvas canvas, float x, float y) {
 		//draw image
 		canvas.drawBitmap(image_sequence[current_image], x, y, imagePaint);
@@ -66,7 +101,13 @@ public class Sprite {
 		}
 	}
 
-	//图片变为数组
+	/**
+	 * 图片变为数组
+	 * @param sprite_sheet
+	 * @param itemsX
+	 * @param length
+	 * @return
+	 */
 	private Bitmap[] convert(Bitmap sprite_sheet, int itemsX, int length) {
 		//定义的int是整数类型  math.ceil向上舍入，即它总是将数值向上舍入为最接近的整数；
 		int itemsY = (int) Math.ceil(length / itemsX);
@@ -118,6 +159,12 @@ public class Sprite {
 
 	}
 
+	/**
+	 * 设置图片的大小比例，或者说缩放放大比例
+	 * @param unscaled
+	 * @param scale
+	 * @return
+	 */
 	public static Bitmap Scale(Bitmap unscaled, float scale) {
 		return Bitmap.createScaledBitmap(unscaled, (int) ((float) (scale)), (int) (((float) (scale) / unscaled.getWidth()) * unscaled.getHeight()), true);
 	}

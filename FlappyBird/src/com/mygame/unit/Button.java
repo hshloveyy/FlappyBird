@@ -8,6 +8,10 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.view.MotionEvent;
 
+/**
+ * 按钮类
+ * @author heshaohua
+ */
 public class Button extends Instance {
 	public final int TEXT_BTN = 0, SPRITE_BTN = 1;
 	public int type;
@@ -16,7 +20,7 @@ public class Button extends Instance {
 
 	/**
 	 * Create new sprite button
-	 * 
+	 * 按钮实例方法，构造函数，此按钮跟android有所区别，为自定义的按钮类
 	 * @param sprite
 	 *            sprite to bisplay on button
 	 * @param x
@@ -35,7 +39,7 @@ public class Button extends Instance {
 
 	/**
 	 * Create new text button
-	 * 
+	 * 同样为实例化，参数不一样，实例化的时候还有文本，字体参数设置
 	 * @param text
 	 *            text to bisplay on button
 	 * @param dpSize
@@ -64,6 +68,10 @@ public class Button extends Instance {
 		this.text = text;
 	}
 
+	/**
+	 * 高亮文本
+	 * @param color
+	 */
 	public void Highlight(int color) {
 		ColorFilter filter = new LightingColorFilter(1, color);
 		if (type == SPRITE_BTN)
@@ -72,6 +80,9 @@ public class Button extends Instance {
 			textPaint.setColorFilter(filter);
 	}
 
+	/**
+	 * 取消高亮
+	 */
 	public void LowLight() {
 		ColorFilter filter = null;
 		if (type == SPRITE_BTN)
@@ -80,6 +91,9 @@ public class Button extends Instance {
 			textPaint.setColorFilter(filter);
 	}
 
+	/**
+	 * 覆盖父类的获取宽度的方法，重新定义获取当前按钮宽度
+	 */
 	@Override
 	public int getWidth() {
 		if (type == SPRITE_BTN)
@@ -91,6 +105,9 @@ public class Button extends Instance {
 		}
 	}
 
+	/**
+	 * 覆盖父类的获取高度的方法，重新定义获取当前按钮高度
+	 */
 	@Override
 	public int getHeight() {
 		if (type == SPRITE_BTN)
@@ -103,6 +120,9 @@ public class Button extends Instance {
 	}
 
 	//draw the sprite to screen
+	/**
+	 * 绘制图像到界面上
+	 */
 	@Override
 	public void draw(Canvas canvas) {
 		if (type == SPRITE_BTN)
@@ -115,6 +135,9 @@ public class Button extends Instance {
 
 	}
 
+	/**
+	 * 覆盖父类事件触碰发生 返回参数  现象时的屏幕坐标，精灵坐标 
+	 */
 	@Override
 	public boolean isTouched(MotionEvent event) {
 		if (world)

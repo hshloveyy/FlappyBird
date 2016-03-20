@@ -20,6 +20,11 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Toast;
 
+/**
+ * 分数管理器
+ * @author heshaohua
+ *
+ */
 @SuppressLint("NewApi")
 public class HighScoreManager {
 
@@ -30,11 +35,22 @@ public class HighScoreManager {
 
 	RelativeLayout layout;
 
+	/**
+	 * 定义一个内部类，用于放分数跟姓名
+	 * @author heshaohua
+	 *
+	 */
 	public class Highscore {
 		public int highscore;
 		public String hiscorename;
 	}
 
+	/**
+	 * 实例化一个分数管理器，参数有屏幕、数据还有布局
+	 * @param screen
+	 * @param savedInstanceState
+	 * @param layout
+	 */
 	public HighScoreManager(Screen screen, Bundle savedInstanceState, RelativeLayout layout) {
 		this.screen = screen;
 		this.layout = layout;
@@ -68,6 +84,9 @@ public class HighScoreManager {
 		});
 	}
 
+	/**
+	 * 根据名称删除输入框
+	 */
 	public synchronized void RemoveName_Editview() {
 		screen.runOnUiThread(new Runnable() {
 			public void run() {
@@ -78,6 +97,10 @@ public class HighScoreManager {
 	}
 
 	//Local_________________________________________________________________________________________________________________________________
+	/**
+	 * 获取本地的分数排名信息
+	 * @return
+	 */
 	public Highscore[] load_localscores() {
 		// load preferences
 		SharedPreferences hiscores = PreferenceManager.getDefaultSharedPreferences(screen.getApplicationContext());
@@ -92,6 +115,10 @@ public class HighScoreManager {
 
 	}
 
+	/**
+	 * 保存分数信息数据到本地
+	 * @param highscore
+	 */
 	public void save_localscores(Highscore[] highscore) {
 		//load preferences
 		SharedPreferences hiscores = PreferenceManager.getDefaultSharedPreferences(screen.getApplicationContext());
@@ -103,6 +130,11 @@ public class HighScoreManager {
 		hiscores_editor.commit();
 	}
 
+	/**
+	 * 新的分数添加到本地缓存数据中
+	 * @param highscore
+	 * @param Default_name
+	 */
 	public void newScore(int highscore, String Default_name) {
 		try {
 
@@ -141,6 +173,10 @@ public class HighScoreManager {
 	
 	}
 
+	/**
+	 * 此方法没什么意思，在游戏功能上没什么用，
+	 * 方法是作用是对本应用APP的报名加密
+	 */
 	public void PrintDeviceSignature() {
 		try {
 			PackageInfo info = screen.getPackageManager().getPackageInfo(screen.getPackageName(),
